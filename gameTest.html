@@ -11,19 +11,36 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Hello World</title>
-</head>
-<script src="Assets/Libs/pixi/pixi.min.js"></script>
+    <title>Alien Cat</title>
 
-<style>
-    * {
-        padding: 0;
-        margin: 0
-    }
-</style>
+    <script src="Assets/Libs/pixi/pixi.min.js"></script>
+    <script src="Assets/Scripts/TSGameEngine/ScenesManager.class.js"></script>
+    <script src="Assets/Scripts/TSGameEngine/Scene.class.js"></script>
+    <script src="Assets/Scripts/Scenes/SplashScene.class.js"></script>
+    <script src="Assets/Scripts/Scenes/MainMenuScene.class.js"></script>
+    <script src="Assets/Scripts/Scenes/GameScene.class.js"></script>
+</head>
 
 <body>
-    <script src="Assets/Scripts/gameTest.js"></script>
+    <!-- <script src="Assets/Scripts/gameTest.js"></script> -->
+
+    <script>
+        //get reference of ScenesManager;
+        var scenesManager = gameTest.ScenesManager;
+
+        //create 
+        scenesManager.create(800, 600);
+
+        //create the splash scene
+        var gameSplash = scenesManager.createScene('splash', gameTest.SplashScene);
+        var gameMenu = scenesManager.createScene('gameMenu', gameTest.MainMenuScene);
+        var gameMenu = scenesManager.createScene('game', gameTest.GameScene);
+        var gameOver = scenesManager.createScene('gameOver', gameTest.SplashScene);
+        var gameCredits = scenesManager.createScene('credits', gameTest.SplashScene);
+
+        //Go to the initial scene of the game
+        scenesManager.goToScene('splash');
+    </script>
 </body>
 
 </html>
