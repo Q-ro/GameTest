@@ -44,8 +44,6 @@ module gameTest {
         public update(deltaTime) {
             super.update(deltaTime);
 
-            console.log(deltaTime);
-
             // this.splashAnimatedImage.rotation += 0.01;
             if (this.fadeSplash)
                 this.timeToChange -= deltaTime;

@@ -18,6 +18,8 @@
     <script src="Assets/Scripts/TSGameEngine/Scene.class.js"></script>
     <script src="Assets/Scripts/Scenes/SplashScene.class.js"></script>
     <script src="Assets/Scripts/Scenes/MainMenuScene.class.js"></script>
+    <script src="Assets/Scripts/Scenes/GameOverScene.class.js"></script>
+    <script src="Assets/Scripts/Util/Keyboard.class.js"></script>
     <script src="Assets/Scripts/Scenes/GameScene.class.js"></script>
 </head>
 
@@ -35,7 +37,7 @@
         var gameSplash = scenesManager.createScene('splash', gameTest.SplashScene);
         var gameMenu = scenesManager.createScene('gameMenu', gameTest.MainMenuScene);
         var gameMenu = scenesManager.createScene('game', gameTest.GameScene);
-        var gameOver = scenesManager.createScene('gameOver', gameTest.SplashScene);
+        var gameOver = scenesManager.createScene('gameOver', gameTest.GameOverScene);
         var gameCredits = scenesManager.createScene('credits', gameTest.SplashScene);
 
         //Go to the initial scene of the game

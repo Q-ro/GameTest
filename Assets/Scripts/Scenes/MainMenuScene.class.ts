@@ -138,7 +138,7 @@ module gameTest {
             this.mainMenuButton1.buttonMode = true;
             this.mainMenuButton1.position.set(this.sceneWidth / 4 - this.mainMenuButton1.width / 2, (this.sceneHeight / 2) + this.mainMenuButton1.height + 10);
 
-            // wen the button is tapped or clicked, go to scene "Game 1" (A.K.A. the game)
+            // when the button is tapped or clicked, go to scene "Game 1" (A.K.A. the game)
             this.mainMenuButton1.on('tap', (event) => {
                 console.log("GO TO GAME 1");
                 this.boolTransitionToGame = true;

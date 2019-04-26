@@ -1,54 +1,44 @@
+/*######################################################################################################
+# Author: Andres Mrad (Q-ro)
+# Date: Apr/25/2019 @ CURRENT_HOUR:CURRENT_MINUTE 
+# Description: Implementation of a keyboard controller that subscribes to key inputs events and triggers delegate functions as needed
+#######################################################################################################*/
+
 // Module
 module gameTest {
 
-    export class Keyboard {
+    export class KeyboardInput {
+        public keyCallback: { [keycode: number]: () => void; } = {};
+        public keyDown: { [keycode: number]: boolean; } = {};
 
-        public value: any;
-        public isDown = false;
-        public isUp = true;
-        public press = undefined;
-        public release = undefined;
-        downHandler;
-        upHandler;
-        downListener;
-        upListener;
-
-        constructor(value) {
-            this.value = value;
-            this.isDown = false;
-            this.isUp = true;
-            this.press = undefined;
-            this.release = undefined;
-
-            this.downHandler = event => {
-                if (event.key === this.value) {
-                    if (this.isUp && this.press) this.press();
-                    this.isDown = true;
-                    this.isUp = false;
-                    event.preventDefault();
-                }
-            };
-
-            this.upHandler = event => {
-                if (event.key === this.value) {
-                    if (this.isDown && this.release) this.release();
-                    this.isDown = false;
-                    this.isUp = true;
-                    event.preventDefault();
-                }
-            };
-
-            window.addEventListener(
-                "keydown", this.downListener, false
-            );
-            window.addEventListener(
-                "keyup", this.upListener, false
-            );
-
+        constructor() {
+            document.addEventListener('keydown', this.keyboardDown);
+            document.addEventListener('keyup', this.keyboardUp);
+        }
+        public keyboardDown = (event: KeyboardEvent): void => {
+            event.preventDefault();
+            this.keyDown[event.keyCode] = true;
+        }
+        public keyboardUp = (event: KeyboardEvent): void => {
+            this.keyDown[event.keyCode] = false;
         }
 
+        public addKeycodeCallback = (keycode: number, f: () => void): void => {
+            this.keyCallback[keycode] = f;
+            this.keyDown[keycode] = false;
+        }
 
-
+        public inputLoop = (): void => {
+            for (var key in this.keyDown) {
+                var is_down: boolean = this.keyDown[key];
+                if (is_down) {
+                    var callback: () => void = this.keyCallback[key];
+                    if (callback != null) {
+                        callback();
+                    }
+                }
+            }
+        }
     }
 
 }
